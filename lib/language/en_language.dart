@@ -15,5 +15,7 @@ class EnLanguage {
     'matches': 'Matches',
     'please_wait': 'Please wait',
     'no_data': 'No data found',
+    'radio': 'Radio',
+    'favorite': 'Favortie',
   };
 }

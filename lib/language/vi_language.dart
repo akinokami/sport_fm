@@ -13,5 +13,7 @@ class ViLanguage {
     'other': 'Khác',
     'score': 'Điểm số',
     'please_wait': 'Vui lòng đợi',
+    'radio': 'Radio',
+    'favorite': 'Yêu thích',
   };
 }

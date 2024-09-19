@@ -15,5 +15,7 @@ class ZhLanguage {
     'matches': '火柴',
     'please_wait': '請稍等',
     'no_data': '沒有找到數據',
+    'radio': '收音機',
+    'favorite': '最喜歡的',
   };
 }
