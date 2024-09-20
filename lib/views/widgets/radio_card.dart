@@ -76,7 +76,7 @@ class RadioCard extends StatelessWidget {
                     ? Icon(
                         Icons.favorite_outline,
                         color: secondaryColor,
-                        size: 15.sp,
+                        size: 18.sp,
                       )
                     : Icon(
                         favoriteController.favRadios
@@ -87,7 +87,7 @@ class RadioCard extends StatelessWidget {
                             ? Icons.favorite
                             : Icons.favorite_outline,
                         color: secondaryColor,
-                        size: 15.sp,
+                        size: 18.sp,
                       ),
               ),
             ),

@@ -35,7 +35,7 @@ class RadioScreen extends StatelessWidget {
             icon: Icon(
               Icons.search,
               color: secondaryColor,
-              size: 15.sp,
+              size: 18.sp,
             ),
           ),
         ],
