@@ -48,7 +48,7 @@ class RadioCard extends StatelessWidget {
           Positioned(
             left: 8.w,
             right: 8.w,
-            bottom: 0,
+            bottom: 2.h,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:sport_fm/controller/favorite_controller.dart';
 import 'package:sport_fm/utils/dimen_const.dart';
 import 'package:sport_fm/views/widgets/custom_loading.dart';
 import 'package:sport_fm/views/widgets/playing_card.dart';
@@ -16,6 +17,7 @@ class RadioDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final playRadioController = Get.put(PlayRadioController());
+    final favoriteController = Get.put(FavoriteController());
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -37,6 +39,38 @@ class RadioDetailScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: InkWell(
+                          onTap: () {
+                            favoriteController
+                                .addToFavorite(playRadioController.radio.value);
+                          },
+                          child: Obx(
+                            () => favoriteController.isLoading.value
+                                ? Icon(
+                                    Icons.favorite_outline,
+                                    color: secondaryColor,
+                                  )
+                                : Icon(
+                                    favoriteController.favRadios
+                                            .where((item) =>
+                                                (item.stationuuid ?? '')
+                                                    .contains(
+                                                        playRadioController
+                                                                .radio
+                                                                .value
+                                                                .stationuuid ??
+                                                            ''))
+                                            .toList()
+                                            .isNotEmpty
+                                        ? Icons.favorite
+                                        : Icons.favorite_outline,
+                                    color: secondaryColor,
+                                  ),
+                          ),
+                        ),
+                      ),
                       Center(
                         child: SizedBox(
                           width: 100.h,
@@ -47,8 +81,7 @@ class RadioDetailScreen extends StatelessWidget {
                               fit: StackFit.passthrough,
                               children: [
                                 Image.network(
-                                  playRadioController.radio.value?.favicon ??
-                                      '',
+                                  playRadioController.radio.value.favicon ?? '',
                                   fit: BoxFit.fill,
                                   errorBuilder: (context, url, error) =>
                                       Image.asset('assets/images/fm.webp'),
@@ -68,7 +101,7 @@ class RadioDetailScreen extends StatelessWidget {
                       kSizedBoxH10,
                       Center(
                         child: CustomText(
-                          text: playRadioController.radio.value?.name ?? '',
+                          text: playRadioController.radio.value.name ?? '',
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
                         ),
@@ -76,7 +109,7 @@ class RadioDetailScreen extends StatelessWidget {
                       kSizedBoxH5,
                       Center(
                         child: CustomText(
-                            text: playRadioController.radio.value?.tags ?? ''),
+                            text: playRadioController.radio.value.tags ?? ''),
                       ),
                       kSizedBoxH10,
                       ControlButtons(
@@ -148,7 +181,7 @@ class ControlButtons extends StatelessWidget {
                   ),
                   child: Icon(
                     Icons.keyboard_double_arrow_left,
-                    size: 30.sp,
+                    size: 28.h,
                     color: secondaryColor,
                   ),
                 ),
@@ -193,7 +226,7 @@ class ControlButtons extends StatelessWidget {
                   ),
                   child: Icon(
                     Icons.play_arrow,
-                    size: 40.sp,
+                    size: 37.h,
                     color: secondaryColor,
                   ),
                 ),
@@ -219,7 +252,7 @@ class ControlButtons extends StatelessWidget {
                   ),
                   child: Icon(
                     Icons.pause,
-                    size: 40.sp,
+                    size: 37.h,
                     color: secondaryColor,
                   ),
                 ),
@@ -245,7 +278,7 @@ class ControlButtons extends StatelessWidget {
                   ),
                   child: Icon(
                     Icons.replay,
-                    size: 40.sp,
+                    size: 37.h,
                     color: secondaryColor,
                   ),
                 ),
@@ -285,7 +318,7 @@ class ControlButtons extends StatelessWidget {
                   ),
                   child: Icon(
                     Icons.keyboard_double_arrow_right,
-                    size: 30.sp,
+                    size: 28.h,
                     color: secondaryColor,
                   ),
                 ),

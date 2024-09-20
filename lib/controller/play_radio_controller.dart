@@ -6,7 +6,7 @@ import 'package:audio_session/audio_session.dart';
 
 class PlayRadioController extends GetxController with WidgetsBindingObserver {
   final player = AudioPlayer();
-  Rx<RadioModel?> radio = RadioModel().obs;
+  Rx<RadioModel> radio = RadioModel().obs;
   RxList<RadioModel> radios = <RadioModel>[].obs;
   final isLoading = false.obs;
 
@@ -28,7 +28,7 @@ class PlayRadioController extends GetxController with WidgetsBindingObserver {
     });
     try {
       await player
-          .setAudioSource(AudioSource.uri(Uri.parse(radio.value?.url ?? '')));
+          .setAudioSource(AudioSource.uri(Uri.parse(radio.value.url ?? '')));
       player.play();
     } catch (e) {
       // constants.showSnackBar(
@@ -44,7 +44,7 @@ class PlayRadioController extends GetxController with WidgetsBindingObserver {
     isLoading.value = true;
     int index = 0;
     index = radios.indexWhere((item) =>
-        (item.stationuuid ?? '').contains(radio.value?.stationuuid ?? ''));
+        (item.stationuuid ?? '').contains(radio.value.stationuuid ?? ''));
     if (index == radios.length - 1) {
       radio.value = radios[0];
     } else {
@@ -58,7 +58,7 @@ class PlayRadioController extends GetxController with WidgetsBindingObserver {
     isLoading.value = true;
     int index = 0;
     index = radios.indexWhere((item) =>
-        (item.stationuuid ?? '').contains(radio.value?.stationuuid ?? ''));
+        (item.stationuuid ?? '').contains(radio.value.stationuuid ?? ''));
     if (index == 0) {
       radio.value = radios[radios.length - 1];
     } else {
