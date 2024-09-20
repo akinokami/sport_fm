@@ -48,9 +48,16 @@ class PlayingCard extends StatelessWidget {
                 ),
               ],
             ),
-            // Icon(
-            //   Icons.play_arrow,
-            //   size: 30.sp,
+            // Obx(
+            //   () => Visibility(
+            //     visible: radioModel?.stationuuid ==
+            //         playRadioController.radio.value.serveruuid,
+            //     child: Icon(
+            //       Icons.music_note,
+            //       size: 25.sp,
+            //       color: secondaryColor,
+            //     ),
+            //   ),
             // ),
           ],
         ),

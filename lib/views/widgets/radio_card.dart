@@ -6,7 +6,6 @@ import 'package:sport_fm/utils/color_const.dart';
 import 'package:sport_fm/views/screens/radio/radio_detail_screen.dart';
 
 import '../../models/radio_model.dart';
-import 'custom_loading.dart';
 import 'custom_text.dart';
 
 class RadioCard extends StatelessWidget {
