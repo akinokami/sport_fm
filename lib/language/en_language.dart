@@ -6,7 +6,7 @@ class EnLanguage {
     'policy': 'Privacy Policy',
     'version': 'Version',
     'settings': 'Settings',
-    'agree': 'I agreed to the privacy policy.',
+    'agree': 'I agreed to the privacy policy.I agreed to the privacy policy.',
     'accept': 'Accept',
     'search': 'Search',
     'general': 'General',

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sport_fm/utils/dimen_const.dart';
 import 'package:sport_fm/utils/enum.dart';
 import 'package:sport_fm/views/screens/favorite/favorite_screen.dart';
 import 'package:sport_fm/views/screens/radio/radio_screen.dart';
 import 'package:sport_fm/views/screens/settings/setting_screen.dart';
+import 'package:sport_fm/views/widgets/custom_button.dart';
 import 'package:sport_fm/views/widgets/custom_text.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -44,27 +46,25 @@ class _BottomNavMenuState extends State<BottomNavMenu> {
                       surfaceTintColor: whiteColor,
                       backgroundColor: whiteColor,
                       content: SizedBox(
-                        height: 1.sh * 0.80,
+                        height: 1.sh,
+                        width: 1.sw,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            SingleChildScrollView(
-                              child: SizedBox(
-                                  height: 1.sh * 0.65,
-                                  width: double.infinity,
-                                  child: WebViewWidget(
-                                      controller: WebViewController()
-                                        ..loadHtmlString(
-                                            Global.language == Language.zh.name
-                                                ? Global.policyZh
-                                                : Global.language ==
-                                                        Language.vi.name
-                                                    ? Global.policyVi
-                                                    : Global.language ==
-                                                            Language.hi.name
-                                                        ? Global.policyHi
-                                                        : Global.policyEn))),
+                            Expanded(
+                              child: WebViewWidget(
+                                  controller: WebViewController()
+                                    ..loadHtmlString(Global.language ==
+                                            Language.zh.name
+                                        ? Global.policyZh
+                                        : Global.language == Language.vi.name
+                                            ? Global.policyVi
+                                            : Global.language ==
+                                                    Language.hi.name
+                                                ? Global.policyHi
+                                                : Global.policyEn)),
                             ),
+                            kSizedBoxH5,
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
@@ -90,27 +90,27 @@ class _BottomNavMenuState extends State<BottomNavMenu> {
                                     });
                                   },
                                 ),
-                                CustomText(
-                                  text: 'agree'.tr,
-                                  color: secondaryColor,
-                                  fontSize: 12,
+                                Expanded(
+                                  child: CustomText(
+                                    text: 'agree'.tr,
+                                    color: secondaryColor,
+                                    fontSize: 11.sp,
+                                    maxLines: 2,
+                                  ),
                                 ),
                               ],
                             ),
-                            ElevatedButton(
-                              style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateColor.resolveWith((states) =>
-                                          isAccepted
-                                              ? secondaryColor
-                                              : greyColor)),
-                              // ignore: sort_child_properties_last
-                              child: CustomText(
-                                text: "accept".tr,
-                                color: whiteColor,
-                                fontSize: 12,
-                              ),
-                              onPressed: isAccepted
+                            kSizedBoxH5,
+                            CustomButton(
+                              text: 'accept'.tr,
+                              size: 11.sp,
+                              width: 100.w,
+                              height: 25.h,
+                              isRounded: true,
+                              outlineColor:
+                                  isAccepted ? secondaryColor : greyColor,
+                              bgColor: isAccepted ? secondaryColor : greyColor,
+                              onTap: isAccepted
                                   ? () async {
                                       LocalStorage.instance.write(
                                           StorageKey.first.name, 'notfirst');
