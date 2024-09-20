@@ -78,7 +78,11 @@ class RadioCard extends StatelessWidget {
                         color: secondaryColor,
                       )
                     : Icon(
-                        favoriteController.favRadios.contains(radioModel)
+                        favoriteController.favRadios
+                                .where((item) => (item.stationuuid ?? '')
+                                    .contains(radioModel?.stationuuid ?? ''))
+                                .toList()
+                                .isNotEmpty
                             ? Icons.favorite
                             : Icons.favorite_outline,
                         color: secondaryColor,

@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:sport_fm/utils/constants.dart';
 import 'package:flutter/material.dart';
 import '../models/radio_model.dart';
 import 'package:audio_session/audio_session.dart';
@@ -32,8 +31,8 @@ class PlayRadioController extends GetxController with WidgetsBindingObserver {
           .setAudioSource(AudioSource.uri(Uri.parse(radio.value?.url ?? '')));
       player.play();
     } catch (e) {
-      constants.showSnackBar(
-          title: 'Warning', msg: 'Radio resource not found.');
+      // constants.showSnackBar(
+      //     title: 'Warning', msg: 'Radio resource not found.');
     }
   }
 

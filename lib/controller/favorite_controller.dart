@@ -28,7 +28,13 @@ class FavoriteController extends GetxController {
   }
 
   void addToFavorite(RadioModel radio) {
-    favRadios.contains(radio) ? favRadios.remove(radio) : favRadios.add(radio);
+    favRadios
+            .where((item) =>
+                (item.stationuuid ?? '').contains(radio.stationuuid ?? ''))
+            .toList()
+            .isNotEmpty
+        ? favRadios.removeWhere((item) => item.stationuuid == radio.stationuuid)
+        : favRadios.add(radio);
     LocalStorage.instance.remove(StorageKey.favorite.name);
     LocalStorage.instance
         .write(StorageKey.favorite.name, jsonEncode(favRadios));
