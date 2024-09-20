@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Global.language = LocalStorage.instance.read(StorageKey.language.name) ??
-        Language.zh.name;
+        Language.en.name;
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       minTextAdapt: true,

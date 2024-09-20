@@ -51,7 +51,7 @@ class RadioDetailScreen extends StatelessWidget {
                                 ? Icon(
                                     Icons.favorite_outline,
                                     color: secondaryColor,
-                                    size: 18.sp,
+                                    size: 20.sp,
                                   )
                                 : Icon(
                                     favoriteController.favRadios
@@ -68,7 +68,7 @@ class RadioDetailScreen extends StatelessWidget {
                                         ? Icons.favorite
                                         : Icons.favorite_outline,
                                     color: secondaryColor,
-                                    size: 18.sp,
+                                    size: 20.sp,
                                   ),
                           ),
                         ),

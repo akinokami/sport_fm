@@ -1,7 +1,7 @@
 import 'package:sport_fm/utils/enum.dart';
 
 class Global {
-  static String language = Language.zh.name;
+  static String language = Language.en.name;
 
   static String policyEn = """
 <!DOCTYPE html>
