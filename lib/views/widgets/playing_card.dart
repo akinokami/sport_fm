@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:sport_fm/utils/color_const.dart';
 import 'package:sport_fm/utils/dimen_const.dart';
 import 'package:sport_fm/views/widgets/custom_card.dart';
 import 'package:sport_fm/views/widgets/custom_text.dart';
@@ -48,17 +51,17 @@ class PlayingCard extends StatelessWidget {
                 ),
               ],
             ),
-            // Obx(
-            //   () => Visibility(
-            //     visible: radioModel?.stationuuid ==
-            //         playRadioController.radio.value.serveruuid,
-            //     child: Icon(
-            //       Icons.music_note,
-            //       size: 25.sp,
-            //       color: secondaryColor,
-            //     ),
-            //   ),
-            // ),
+            Obx(
+              () => Visibility(
+                visible: radioModel?.stationuuid ==
+                    playRadioController.radio.value.stationuuid,
+                child: Icon(
+                  Icons.music_note,
+                  size: 25.sp,
+                  color: secondaryColor,
+                ),
+              ),
+            ),
           ],
         ),
       ),
