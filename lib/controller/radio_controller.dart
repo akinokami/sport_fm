@@ -26,11 +26,7 @@ class RadioController extends GetxController {
         await rootBundle.loadString('assets/data/radio.json');
     final data = await json.decode(response);
     var r = data as List;
-    var rad = r.map((item) => RadioModel.fromJson(item)).toList();
-    radios.value = rad
-        .where(
-            (element) => (element.tags ?? '').toLowerCase().contains('sport'))
-        .toList();
+    radios.value = r.map((item) => RadioModel.fromJson(item)).toList();
     Future.delayed(const Duration(seconds: 1), () {
       isLoading.value = false;
     });

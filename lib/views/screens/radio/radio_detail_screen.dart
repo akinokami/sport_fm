@@ -28,81 +28,89 @@ class RadioDetailScreen extends StatelessWidget {
           ),
         ),
         body: Obx(
-          () => Padding(
-            padding: EdgeInsets.all(10.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: SizedBox(
-                    width: 100.h,
-                    height: 100.h,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5.r),
-                      child: Stack(
-                        fit: StackFit.passthrough,
-                        children: [
-                          Image.network(
-                            playRadioController.radio.value?.favicon ?? '',
-                            fit: BoxFit.fill,
-                            errorBuilder: (context, url, error) =>
-                                Image.asset('assets/images/fm.webp'),
-                          ),
-                          Positioned(
-                            left: 0,
-                            right: 0,
-                            child: Image.asset(
-                              'assets/images/overlay.webp',
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                kSizedBoxH10,
-                Center(
-                  child: CustomText(
-                    text: playRadioController.radio.value?.name ?? '',
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                kSizedBoxH5,
-                Center(
-                  child: CustomText(
-                      text: playRadioController.radio.value?.tags ?? ''),
-                ),
-                kSizedBoxH10,
-                ControlButtons(playRadioController.player),
-                kSizedBoxH10,
-                CustomText(
-                  text: 'other'.tr,
-                  fontWeight: FontWeight.w500,
-                ),
-                kSizedBoxH5,
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: playRadioController.radios.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return PlayingCard(
-                        radioModel: playRadioController.radios[index],
-                      );
-                    },
-                  ),
+          () => playRadioController.isLoading.value
+              ? const Center(
+                  child: CustomLoading(),
                 )
-              ],
-            ),
-          ),
+              : Padding(
+                  padding: EdgeInsets.all(10.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: SizedBox(
+                          width: 100.h,
+                          height: 100.h,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(5.r),
+                            child: Stack(
+                              fit: StackFit.passthrough,
+                              children: [
+                                Image.network(
+                                  playRadioController.radio.value?.favicon ??
+                                      '',
+                                  fit: BoxFit.fill,
+                                  errorBuilder: (context, url, error) =>
+                                      Image.asset('assets/images/fm.webp'),
+                                ),
+                                Positioned(
+                                  left: 0,
+                                  right: 0,
+                                  child: Image.asset(
+                                    'assets/images/overlay.webp',
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      kSizedBoxH10,
+                      Center(
+                        child: CustomText(
+                          text: playRadioController.radio.value?.name ?? '',
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      kSizedBoxH5,
+                      Center(
+                        child: CustomText(
+                            text: playRadioController.radio.value?.tags ?? ''),
+                      ),
+                      kSizedBoxH10,
+                      ControlButtons(
+                          playRadioController.player, playRadioController),
+                      kSizedBoxH10,
+                      CustomText(
+                        text: 'other'.tr,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      kSizedBoxH5,
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: playRadioController.radios.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return PlayingCard(
+                              radioModel: playRadioController.radios[index],
+                              playRadioController: playRadioController,
+                            );
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                ),
         ));
   }
 }
 
 class ControlButtons extends StatelessWidget {
   final AudioPlayer player;
-
-  const ControlButtons(this.player, {Key? key}) : super(key: key);
+  final PlayRadioController playRadioController;
+  const ControlButtons(this.player, this.playRadioController, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +127,9 @@ class ControlButtons extends StatelessWidget {
               return Container();
             } else {
               return GestureDetector(
-                onTap: player.play,
+                onTap: () {
+                  playRadioController.previousUrl();
+                },
                 child: Container(
                   alignment: Alignment.center,
                   height: 30.h,
@@ -254,7 +264,9 @@ class ControlButtons extends StatelessWidget {
               return Container();
             } else {
               return GestureDetector(
-                onTap: player.play,
+                onTap: () {
+                  playRadioController.nextUrl();
+                },
                 child: Container(
                   alignment: Alignment.center,
                   height: 30.h,
